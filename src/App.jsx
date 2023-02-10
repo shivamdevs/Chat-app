@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Context from "./functions/Context";
 import snapShot, { unsnapShot } from "./fb.chat";
 import app from "./app.data";
+import sortBy from "sort-by";
 
 function App() {
     const navigate = useNavigate();
@@ -39,7 +40,7 @@ function App() {
                 console.log(error);
             });
         } else {
-            unsnapShot();
+            // unsnapShot();
         }
     }, [user]);
 

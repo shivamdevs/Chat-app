@@ -2,7 +2,7 @@ import generateUniqueId from 'generate-unique-id';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useParams } from "react-router-dom";
-import { sendMessage, setBufferMesage, snapMessageChannel, unsnapMessageChannel } from '../fb.chat';
+import { getBufferMesage, sendMessage, setBufferMesage, snapMessageChannel, unsnapMessageChannel } from '../fb.chat';
 import Context from '../functions/Context';
 import CryptoJS from "crypto-js";
 import "./../styles/chat.css";
@@ -18,6 +18,8 @@ function ChatPanel() {
     const { user, currentConnection, messages, updateMessages, friend } = useContext(Context);
     const [messageList, setMessageList] = useState(null);
 
+    const [bufferMessages, updateBufferMessages] = useState([]);
+
     useEffect(() => {
         currentConnection && snapMessageChannel(currentConnection, (snap) => {
             if (!snap) return updateMessages(null);
@@ -32,14 +34,29 @@ function ChatPanel() {
     }, [currentConnection, updateMessages]);
 
     useEffect(() => {
-        if (messages?.length) {
-            const msg = [...messages];
-            msg.sort(sortBy("sortby", "groupby"));
-            setMessageList(groupBy(msg, "groupby"));
+        if (messages?.length && bufferMessages?.length) {
+            messages.forEach((cache) => {
+                const key = cache.key;
+                updateBufferMessages(old => {
+                    const buffer = [...old];
+                    buffer.forEach((buff, index) => buff.key === key && buffer.splice(index, 1));
+                    return buffer;
+                });
+            });
+        }
+    }, [bufferMessages?.length, messages]);
+
+    useEffect(() => {
+        if (messages) {
+            setTimeout(() => {
+                const msg = [...messages, ...bufferMessages];
+                msg.sort(sortBy("sortby", "groupby"));
+                setMessageList(groupBy(msg, "groupby"));
+            }, 100);
         } else {
             setMessageList(null);
         }
-    }, [messages]);
+    }, [bufferMessages, messages]);
 
     const textbox = useRef();
     const [message, setMessage] = useState("");
@@ -52,22 +69,24 @@ function ChatPanel() {
         textbox.current && textbox.current.focus();
 
         sendMessage(postmessage, currentConnection, user, friend, (snap) => {
-            const slip = { ...snap };
-            slip.pending = true;
-            slip.id = generateUniqueId({ length: 32 });
-            updateMessages(old => [...old, slip]);
+            updateBufferMessages(old => [...old, { ...snap, pending: true }]);
         }, (error) => {
             toast.error("Failed to send message.");
         });
     };
 
     useEffect(() => {
-        setBufferMesage(params.uid, message);
+        let buffer = null;
+        currentConnection && (buffer = getBufferMesage(currentConnection)) && setMessage(buffer);
+    }, [currentConnection]);
+
+    useEffect(() => {
+        setBufferMesage(currentConnection, message);
         if (textbox.current) {
             textbox.current.style.height = 0;
             textbox.current.style.height = (textbox.current.scrollHeight) + "px";
         }
-    }, [message, params.uid]);
+    }, [currentConnection, message, params.uid]);
 
     return (
         <>
@@ -80,7 +99,7 @@ function ChatPanel() {
                     {messageList && Object.keys(messageList).map(data => <ChatDate key={data} timestamp={data} data={messageList[data]} />)}
                 </div>
             </div>
-            <footer className="chat-box">
+            {friend && <footer className="chat-box">
                 <div className="chat-footer">
                     <button className="chat-attach button-round"><i className="fas fa-paperclip"></i></button>
                     <textarea
@@ -93,10 +112,9 @@ function ChatPanel() {
                         onChange={({ target }) => setMessage(target.value)}
                     ></textarea>
                     <button className="chat-send button-round" onClick={sendData} disabled={message.trim().length === 0 || message.length > 250}><i className="fas fa-paper-plane"></i></button>
-
                 </div>
                 {message.length > 250 && <div className="chat-error">Message is too long. Please cut it short.</div>}
-            </footer>
+            </footer>}
         </>
     );
 };

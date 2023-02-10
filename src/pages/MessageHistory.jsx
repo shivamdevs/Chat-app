@@ -48,7 +48,6 @@ export default MessageHistory;
 
 function HistoryContainer({data = null}) {
     const { usersListByUid, goto } = useContext(Context);
-
     const [user, setUser] = useState(null);
 
     useEffect(() => {
