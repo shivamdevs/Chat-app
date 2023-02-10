@@ -1,0 +1,52 @@
+.panel-header {
+    display: flex;
+    flex-wrap: nowrap;
+    flex: 1;
+    gap: 15px;
+    width: calc(100% - 100px);
+    align-items: center;
+    padding: 2.5px 5px 2.5px 2.5px;
+    border-radius: 25px 5px 5px 25px;
+    transition: .5s;
+}
+.panel-header-active:hover {
+    cursor: pointer;
+    background-color: var(--background-lightest);
+}
+.panel-header-image {
+    min-width: 35px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.panel-header-skeleton {
+    width: 40px;
+    height: 40px;
+    min-height: 40px;
+}
+.panel-header-name {
+    display: block;
+    flex: 1;
+    font-weight: 500;
+    font-size: 18px;
+}
+.panel-error {
+    gap: 20px;
+    flex: .4;
+}
+.panel-error-title {
+    font-size: 20px;
+    font-weight: 700;
+}
+.panel-error-text {
+    color: var(--color-dark);
+}
+.panel-error-option {
+    display: flex;
+    justify-content: flex-end;
+}
+.panel-chats {
+    flex-wrap: nowrap;
+}
