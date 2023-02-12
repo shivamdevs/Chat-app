@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { SkeletonTheme } from 'react-loading-skeleton';
 import { Route, Routes } from 'react-router-dom';
-import LoadSVG from '../components/LoadSVG';
 import Context from '../functions/Context';
 import './../styles/index.css';
 import 'react-loading-skeleton/dist/skeleton.css';
