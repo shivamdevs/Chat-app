@@ -6,9 +6,8 @@ import './App.css';
 import Accounts from "myoasis-accounts";
 import Index from "./pages/Index";
 import Context from "./functions/Context";
-import snapShot, { unsnapShot } from "./fb.chat";
+import snapShot from "./fb.chat";
 import app from "./app.data";
-import sortBy from "sort-by";
 
 function App() {
     const navigate = useNavigate();

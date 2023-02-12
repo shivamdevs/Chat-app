@@ -25,9 +25,18 @@ function Window() {
                     </div>
                 } />
                 <Route path="/:connectid/*" element={
-                    <div className="section window-main">
-                        <MessagePanel />
-                    </div>
+                    <>
+                        <div className="section window-main">
+                            <MessagePanel />
+                        </div>
+                        <Routes>
+                            <Route path="/profile/*" element={
+                                <div className="section window-main">
+                                    <ProfilePanel />
+                                </div>
+                            } />
+                        </Routes>
+                    </>
                 } />
             </Routes>
         </>

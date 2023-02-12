@@ -16,7 +16,10 @@ function Index() {
                 <Route path="/*" element={<Window />} />
             </Routes>}
             {!loading && !user && <Welcome />}
-            {loading && <div className="loading-screen"><LoadSVG size={60} /></div>}
+            {loading && <div className="loading-screen">
+                <img src="/logo192.png" onLoad={({target}) => target.classList.add("loading-image")} alt="" />
+                <span>Loading...</span>
+            </div>}
         </SkeletonTheme>
     );
 };

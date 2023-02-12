@@ -1,4 +1,3 @@
-import generateUniqueId from 'generate-unique-id';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useParams } from "react-router-dom";
@@ -88,6 +87,7 @@ function ChatPanel() {
         }
     }, [currentConnection, message, params.uid]);
 
+
     return (
         <>
             <div className="chat-area">
@@ -101,7 +101,6 @@ function ChatPanel() {
             </div>
             {friend && <footer className="chat-box">
                 <div className="chat-footer">
-                    <button className="chat-attach button-round"><i className="fas fa-paperclip"></i></button>
                     <textarea
                         ref={textbox}
                         className="chat-textbox"

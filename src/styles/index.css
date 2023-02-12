@@ -5,7 +5,25 @@
     z-index: 111;
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    gap: 10px;
     align-items: center;
+}
+.loading-image {
+    width: 50px;
+    animation: loading_jump 2s ease-in-out 0s infinite;
+}
+
+@keyframes loading_jump {
+    0%, 60%, 100% {
+        translate: 0 0;
+    }
+    30% {
+        translate: 0 -50%;
+    }
+    80% {
+        translate: 0 -10%;
+    }
 }
 
 .section {
@@ -211,6 +229,7 @@
 .alignalert {
     position: absolute;
     inset: 0;
+    z-index: 1;
     background-color: var(--background-transparent);
     display: flex;
     justify-content: center;

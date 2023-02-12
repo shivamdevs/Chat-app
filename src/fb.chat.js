@@ -4,7 +4,6 @@ import app from "./app.data";
 import { db } from "./fb.user";
 import uniqid from 'uniqid';
 import CryptoJS from "crypto-js";
-import sortBy from "sort-by";
 import generateUniqueId from "generate-unique-id";
 
 
@@ -70,7 +69,7 @@ export default function snapShot(user, resolve, reject) {
                 result.connections[shots.id] = frienduid;
                 result.connectedUsers.push(frienduid);
 
-                data.content && data.encrypt && result.messageHistory.push({
+                data.updated && result.messageHistory.push({
                     id: shots.id,
                     uid: frienduid,
                     sender: (data.sender === user.uid),
