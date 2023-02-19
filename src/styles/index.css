@@ -9,8 +9,10 @@
     gap: 10px;
     align-items: center;
 }
-.loading-image {
+.loading-screen > img {
     width: 50px;
+}
+.loading-image {
     animation: loading_jump 2s ease-in-out 0s infinite;
 }
 
@@ -294,4 +296,9 @@
 .avatar-image-45.avatar-image-loaded {
     width: 45px;
     height: 45px;
+}
+.avatar-image-skeleton:has(+.avatar-image-300),
+.avatar-image-300.avatar-image-loaded {
+    width: 300px;
+    height: 300px;
 }

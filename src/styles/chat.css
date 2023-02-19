@@ -229,3 +229,14 @@
     font-weight: 500;
     color: var(--theme-red);
 }
+
+
+.chat-link {
+    text-decoration: none;
+    color: var(--theme-green);
+    transition: .2s;
+}
+
+.chat-link:hover {
+    color: var(--theme-blue);
+}

@@ -20,7 +20,8 @@ function MessageHistory() {
                     <ContextMenuTrigger menu="profile" exact={false} trigger="click" type="button" className="button-round"><i className="fas fa-ellipsis-vertical"></i></ContextMenuTrigger>
                     <ContextMenu className="contextmenu" menu="profile">
                         <ContextMenuItem className="contextmenuitem"><i className="fas fa-square-check"></i>Select</ContextMenuItem>
-                        <ContextMenuItem className="contextmenuitem" onClick={() => goto("/settings")}><i className="fas fa-cog"></i>Settings</ContextMenuItem>
+                        <ContextMenuItem className="contextmenuitem" onClick={() => goto("/accounts/profile")}><i className="fas fa-user-edit"></i>Edit profile</ContextMenuItem>
+                        <ContextMenuItem className="contextmenuitem" onClick={() => goto("/profile")}><i className="fas fa-user"></i>View profile</ContextMenuItem>
                         <ContextMenuItem className="contextmenuitem" onClick={logout}><i className="fas fa-power-off"></i>Logout</ContextMenuItem>
                     </ContextMenu>
                 </div>

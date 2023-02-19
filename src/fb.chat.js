@@ -148,8 +148,8 @@ export function unsnapMessageChannel() {
 
 let bufferMessages = {};
 
-if (window.localStorage) {
-    let buffer = window.localStorage.getItem(`${app.bucket}:buffer:messages`);
+if (window.sessionStorage) {
+    let buffer = window.sessionStorage.getItem(`${app.bucket}buffer`);
     if (buffer !== null) {
         try {
             buffer = JSON.parse(buffer);
@@ -164,7 +164,7 @@ export function setBufferMesage(key, value) {
     } else {
         delete bufferMessages[key];
     }
-    if (window.localStorage) window.localStorage.setItem(`${app.bucket}:buffer:messages`, JSON.stringify(bufferMessages));
+    if (window.sessionStorage) window.sessionStorage.setItem(`${app.bucket}buffer`, JSON.stringify(bufferMessages));
 }
 export function getBufferMesage(key) {
     return bufferMessages[key];

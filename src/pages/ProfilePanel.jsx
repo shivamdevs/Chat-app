@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { Route, Routes, useParams } from 'react-router-dom';
+import Profile from '../components/Profile';
 import Context from '../functions/Context';
+import Preview from './Preview';
 
 function ProfilePanel() {
     
@@ -16,8 +18,9 @@ function ProfilePanel() {
                 <button type="button" className="button-round" onClick={() => back()}><i className="fas fa-arrow-left"></i></button>
                 <div className="panel-header-name nooverflow">{data?.name || <Skeleton />}</div>
             </header>
-            <main className="mainbody">
-                <Skeleton className="preview-skeleton-class" containerClassName="preview-skeleton" />
+            <main className="mainbody preview-body preview">
+                {data && <Preview image={data.profile} />}
+                {!data && <Profile size={300} />}
                 <Routes>
                     <Route path='/:userid' element={<SetUser  err={setProfileError} set={setData} />} />
                     <Route path='/' element={<SetUser  err={setProfileError} set={setData} proxy={true} />} />
@@ -50,7 +53,7 @@ function SetUser({ set = null, err = null, proxy = null}) {
                     err("This profile url is invalid. Either the user has been removed or never existed in the first place.");
                 }
             } else if (proxy) {
-                set(user);
+                set(usersListByUid[user.uid]);
             } else {
                 err("There was some error getting user profile data. Try again later.");
             }

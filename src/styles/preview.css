@@ -1,0 +1,37 @@
+.preview {
+    overflow: hidden !important;
+    padding: 10px;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.preview-zoomer {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.preview:has(.preview-waiting) {
+    background-image: url(https://assets.myoasis.tech/icons/loading/dodgerblue.svg);
+    background-size: 40px;
+}
+
+.preview:has(.preview-broken) {
+    background-size: 200px;
+}
+
+.preview:has(.preview-broken)::after {
+    content: "This content is broken.";
+    color: var(--color-darker);
+    margin-top: 150px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.preview:has(.preview-broken.preview-image) {
+    background-image: url(https://assets.myoasis.tech/chat/images/broken-image.svg);
+}

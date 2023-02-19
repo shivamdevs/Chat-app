@@ -12,6 +12,7 @@ import Skeleton from 'react-loading-skeleton';
 import { getDisplayDate } from '../app.functions';
 import Profile from '../components/Profile';
 import LoadSVG from '../components/LoadSVG';
+import Linker from '../components/Linker';
 
 function ChatPanel() {
     const { user, currentConnection, messages, updateMessages, friend } = useContext(Context);
@@ -202,7 +203,7 @@ function ChatBox({ data = null, right = null, left = null }) {
             }
         )}>
             {data ? <div className="chatbox-area">
-                <div className="chatbox-message">{CryptoJS.AES.decrypt(data.content, data.encrypt).toString(CryptoJS.enc.Utf8)}</div>
+                <div className="chatbox-message"><Linker className="chat-link" target="_blank" rel="noopener noreferrer">{CryptoJS.AES.decrypt(data.content, data.encrypt).toString(CryptoJS.enc.Utf8)}</Linker></div>
                 <div className="chatbox-time">{data.sent}</div>
             </div> : <Skeleton containerClassName="chat-skeleton" style={{ height: "100%", lineHeight: "3" }} />}
         </div>
