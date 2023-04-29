@@ -7,6 +7,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "classnames": "^2.3.2",
+    "contextmenu-oasis": "file:src/contextmenu-oasis-1.0.0.tgz",
     "crypto-js": "^4.1.1",
     "firebase": "^9.15.0",
     "generate-unique-id": "^2.0.1",

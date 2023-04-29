@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Context from "./functions/Context";
 import snapShot from "./fb.chat";
 import app from "./app.data";
+import { ContextMenuBlock } from "contextmenu-oasis";
 
 function App() {
     const navigate = useNavigate();
@@ -79,10 +80,12 @@ function App() {
 
     return (
         <Context.Provider value={context}>
-            <Routes>
-                <Route path="/accounts/*" element={<Accounts onUserChange={context.back} />} />
-                <Route path="/*" element={<Index />} />
-            </Routes>
+            <ContextMenuBlock>
+                <Routes>
+                    <Route path="/accounts/*" element={<Accounts onUserChange={context.back} />} />
+                    <Route path="/*" element={<Index />} />
+                </Routes>
+            </ContextMenuBlock>
         </Context.Provider>
     );
 };

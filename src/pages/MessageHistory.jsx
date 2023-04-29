@@ -1,4 +1,4 @@
-import { ContextMenuTrigger, ContextMenu, ContextMenuItem } from 'myoasis-contextmenu';
+import { ContextMenuTrigger, ContextMenu, ContextMenuItem } from 'contextmenu-oasis';
 import React, { useContext, useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { logout } from '../fb.user';
@@ -17,8 +17,10 @@ function MessageHistory() {
                 <img src="/logo192.png" alt="" className="history-icon" />
                 <div className="history-header-flex">
                     <button type="button" className="button-round" onClick={() => goto("/search")}><i className="fas fa-search"></i></button>
-                    <ContextMenuTrigger menu="profile" exact={false} trigger="click" type="button" className="button-round"><i className="fas fa-ellipsis-vertical"></i></ContextMenuTrigger>
-                    <ContextMenu className="contextmenu" menu="profile">
+                    <ContextMenuTrigger name="profile" placement="bottom-right" trigger="click">
+                        <button type="button" className="button-round"><i className="fas fa-ellipsis-vertical"></i></button>
+                    </ContextMenuTrigger>
+                    <ContextMenu className="contextmenu" theme='dark' name="profile">
                         <ContextMenuItem className="contextmenuitem"><i className="fas fa-square-check"></i>Select</ContextMenuItem>
                         <ContextMenuItem className="contextmenuitem" onClick={() => goto("/accounts/profile")}><i className="fas fa-user-edit"></i>Edit profile</ContextMenuItem>
                         <ContextMenuItem className="contextmenuitem" onClick={() => goto("/profile")}><i className="fas fa-user"></i>View profile</ContextMenuItem>
